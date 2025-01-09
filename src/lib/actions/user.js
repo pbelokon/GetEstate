@@ -1,4 +1,5 @@
 import User from '../models/user.model';
+
 import { connect } from '../mongodb/mongoose';
 
 export const createOrUpdateUser = async (
@@ -27,7 +28,6 @@ export const createOrUpdateUser = async (
     console.log('Error: Could not create or update user:', error);
   }
 };
-
 
 export const deleteUser = async (id) => {
   try {
