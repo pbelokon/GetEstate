@@ -13,7 +13,7 @@ if (eventType === 'user.created' || eventType === 'user.updated') {
     );
     if (user && eventType === 'user.created') {
       try {
-        await clerkClient.user.updateUserMetadata(id, {
+        await clerkClient.users.updateUserMetadata(id, {
           publicMetadata: {
             userMogoId: user._id,
           },
@@ -39,6 +39,6 @@ if (eventType === 'user.deleted') {
       status: 400,
     });
   }
-}
 
-return new Response('Webhook received', { status: 200 });
+  return new Response('Webhook received', { status: 200 });
+}
