@@ -1,24 +1,13 @@
 import mongoose from 'mongoose';
 
-let initialized = false;
+const uri = process.env.MONGODB_URI;
 
 export const connect = async () => {
-  mongoose.set('strictQuery', true);
-
-  if (initialized) {
-    console.log('MongoDB already connected');
+  if (mongoose.connection.readyState >= 1) {
     return;
   }
-
-  try {
-    await mongoose.connect(process.env.MONGODB_URI, {
-      dbName: 'real-data',
-      useNewUrlParser: true,
-      useUnifiedTopology: true,
-    });
-    initialized = true;
-    console.log('MongoDB connected');
-  } catch (error) {
-    console.log('MongoDB connection error:', error);
-  }
+  return mongoose.connect(uri, {
+    useNewUrlParser: true,
+    useUnifiedTopology: true,
+  });
 };
